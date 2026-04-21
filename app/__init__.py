@@ -82,7 +82,7 @@ def create_app(config_class="config.Config"):
     # =========================
     from .main import main as main_bp
     from .admin import admin as admin_bp
-    from .seo import seo as seo_bp
+    from  app.seo import seo as seo_bp
     from .newsletter import newsletter as newsletter_bp
 
     app.register_blueprint(main_bp)
@@ -96,5 +96,7 @@ def create_app(config_class="config.Config"):
     if not app.debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
         from app.scheduler import start_scheduler
         start_scheduler(app)
+
+    print(app.url_map)  # Debug: Print all registered routes
 
     return app

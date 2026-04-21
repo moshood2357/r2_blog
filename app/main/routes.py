@@ -204,7 +204,7 @@ def subscribe_newsletter():
         flash("Subscribed successfully!", "success")
         return redirect(request.referrer or url_for("main.blog"))
 
-    flash("Please enter a valid email.", "danger")
+    flash("Email already exist.", "danger")
     return redirect(request.referrer or url_for("main.blog"))
 
 

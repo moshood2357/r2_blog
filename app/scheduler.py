@@ -93,7 +93,7 @@ def generate_ai_newsletter():
         return {"title": title, "content": content, "tip": tip}
 
     except Exception as e:
-        print(f"❌ AI Error: {e}")
+        print(f" AI Error: {e}")
         return {
             "title": "Stay Consistent 🚀",
             "content": "Success comes from showing up every day. Focus on small improvements and keep building momentum.",
@@ -112,7 +112,7 @@ def send_weekly_newsletter():
             subscribers = NewsletterSubscriber.query.filter_by(is_active=True).all()
 
             if not subscribers:
-                print("⚠️ No subscribers found")
+                print(" No subscribers found")
                 return
 
             newsletter = generate_ai_newsletter()
@@ -121,11 +121,11 @@ def send_weekly_newsletter():
             sender_email = os.getenv("MAIL_DEFAULT_SENDER")
 
             if not api_key:
-                print("❌ Missing BREVO_API_KEY")
+                print(" Missing BREVO_API_KEY")
                 return
 
             if not sender_email:
-                print("❌ Missing MAIL_DEFAULT_SENDER")
+                print(" Missing MAIL_DEFAULT_SENDER")
                 return
 
             sender_email = sender_email.strip()
@@ -156,7 +156,7 @@ Hello {getattr(sub, 'name', 'there')},
 💡 Tip:
 {newsletter['tip']}
 
-👉 Visit: https://r2systemsolution.co.uk
+ Visit: https://r2systemsolution.co.uk
 Date: {datetime.utcnow().strftime('%Y-%m-%d')}
 """
 
@@ -173,7 +173,7 @@ Date: {datetime.utcnow().strftime('%Y-%m-%d')}
                             "email": sender_email
                         },
                         "to": [{"email": sub.email.strip()}],
-                        "subject": f"🚀 {newsletter['title']}",
+                        "subject": f" {newsletter['title']}",
                         "textContent": text_content,
                         "htmlContent": html_content
                     }
@@ -192,16 +192,16 @@ Date: {datetime.utcnow().strftime('%Y-%m-%d')}
                         failed.append(sub.email)
 
                 except Exception as e:
-                    print(f"❌ Failed for {sub.email}: {e}")
+                    print(f" Failed for {sub.email}: {e}")
                     failed.append(sub.email)
 
             if failed:
-                print(f"⚠️ Failed emails: {failed}")
+                print(f" Failed emails: {failed}")
             else:
-                print(f"✅ [{datetime.utcnow()}] Newsletter sent successfully!")
+                print(f" [{datetime.utcnow()}] Newsletter sent successfully!")
 
         except Exception as e:
-            print(f"❌ Newsletter Error: {e}")
+            print(f" Newsletter Error: {e}")
 
 
 # =========================
